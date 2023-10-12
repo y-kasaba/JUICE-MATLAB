@@ -1,5 +1,5 @@
 % ***********************************
-% *** 20231008   Y Kasaba
+% *** 20231012   Y Kasaba
 % ***********************************
 function [st_ctl, st_rpw, st_aux, st_hfa, st_time, rdata, data_sz, err] = hf_ccsds_depacket_bin(st_ctl)
 
@@ -18,6 +18,8 @@ function [st_ctl, st_rpw, st_aux, st_hfa, st_time, rdata, data_sz, err] = hf_ccs
         % ----------------------
         hdr_bin = fread(st_ctl.r, 10, 'uint8');
         if size(hdr_bin) ~= 10
+            fprintf("***** EOF is detected *****\n");
+            err = 1;
             break;
         end
         err = 0;
@@ -47,6 +49,9 @@ function [st_ctl, st_rpw, st_aux, st_hfa, st_time, rdata, data_sz, err] = hf_ccs
         %----------------------------------------
         % Read Auxilary data
         %----------------------------------------
+        fprintf("\n");
+        fprintf("=========================================================\n");
+
         % SW version
         if st_rpw.aux_len == 4
             st_ctl.ver = 1.0;

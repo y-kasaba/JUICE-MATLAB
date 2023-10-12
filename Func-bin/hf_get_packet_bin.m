@@ -1,5 +1,5 @@
 % ***********************************
-% *** 20231007   Y Kasaba
+% *** 20231012   Y Kasaba
 % ***********************************
 function [ret, st_ctl] = hf_get_packet_bin(in_file)
 
@@ -9,6 +9,9 @@ function [ret, st_ctl] = hf_get_packet_bin(in_file)
     out_sz = 0;
     n_pkt = 0;
     ret = 0;
+
+    fprintf("\n");
+    fprintf("=========================================================\n");
 
     while ~feof(r)
         % ----------------------
@@ -41,5 +44,8 @@ function [ret, st_ctl] = hf_get_packet_bin(in_file)
 
     st_ctl.n_pkt  = n_pkt;
     st_ctl.out_sz = out_sz;
+
+    fprintf("=========================================================\n");
+    fprintf("\n");
 
 end

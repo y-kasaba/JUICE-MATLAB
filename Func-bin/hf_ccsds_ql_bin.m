@@ -1,5 +1,5 @@
 % ***********************************
-% *** 20231007   Y Kasaba
+% *** 20231012   Y Kasaba
 % ***********************************
 %-----------------------------------
 % How to use hf_ccsds_ql.m
@@ -115,8 +115,12 @@ function [st_ctl] = hf_ccsds_ql_bin(ql, st_ctl)
         %-----------------------------------
         % Get HF telemetry data
         %-----------------------------------
+        fprintf("\n");
+        fprintf("Start hf_ccsds_depacket_bin\n");
         [st_ctl, st_rpw, st_aux, st_hfa, st_time, rdata, data_sz, err] = hf_ccsds_depacket_bin(st_ctl);
+
         % check error
+        % fprintf("   error check : %d\n", err);
         if err == 1
             % --- for DL ---
             if ql == 0
@@ -142,7 +146,8 @@ function [st_ctl] = hf_ccsds_ql_bin(ql, st_ctl)
             % --- for DL ---
             pause(0.01);
             if feof(st_ctl.r) == 1; break; end
-            if sumSize + data_sz > st_ctl.fileSize; break; end
+            if sumSize >= st_ctl.fileSize; break; end
+            % if sumSize + data_sz > st_ctl.fileSize; break; end
         else
             % --- for QL ---
             pause(0.01);
@@ -151,7 +156,7 @@ function [st_ctl] = hf_ccsds_ql_bin(ql, st_ctl)
         % check the latest input from keyboard
         % if press 'q' on the figure, program is terminated.
         if strcmp(get(hf,'currentcharacter'),'q')
-            fprintf("Please wait until MALAB outputs QL pdf file.\n");
+            % fprintf("Please wait until MALAB outputs QL pdf file.\n");
             break
         end
         
@@ -166,7 +171,8 @@ function [st_ctl] = hf_ccsds_ql_bin(ql, st_ctl)
         hf_plot_ft(st_ctl);
         ret = hf_rpt_add_figure(st_ctl);
     end
-    
+    fprintf("Please wait until MALAB outputs QL pdf file.\n");
+
     %-----------------------------------
     % Save matlab data
     %----------------------------------- 
@@ -184,6 +190,8 @@ function [st_ctl] = hf_ccsds_ql_bin(ql, st_ctl)
     %-----------------------------------
     fclose(st_ctl.r);
     if ql == 1; fclose(st_ctl.w); end
+    fprintf("\n");
+    fprintf("=========================================================\n");
     fprintf("Finished !\n");
 
 end

@@ -1,10 +1,10 @@
 % ***********************************
-% *** 20231010   Y Kasaba
+% *** 20231012   Y Kasaba
 % ***********************************
 %------------------------------------
 % User inputs
 %------------------------------------
-input_format = 1;   % 0:ccsds      1:bin converted from TMIDX
+input_format = 0;   % 0:ccsds      1:bin converted from TMIDX
 %addpath('/Users/user/Documents/MATLAB/JUICE/HF-QL/')
 %addpath('/Users/user/Documents/MATLAB/JUICE/HF-QL/Func/')
 %addpath('/Users/user/Documents/MATLAB/JUICE/HF-QL/Func-bin/')
@@ -16,7 +16,7 @@ if input_format == 0
     basedir_in  = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-CCSDS/sample/ccsds/";
     basedir_out = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-CCSDS/sample/result/";
     file_search_str = "*.ccs";
-    % file_search_str = "SID07-23_20231007-2119_Cfg10.ccs";
+    file_search_str = "SID07-23_*.ccs";
     indir  = [""];
     outdir = [""];
     % indir  = ["CFDP_04_RT_EMC_AC_SC2RIME\CFDP\RETRIEVAL\" "RPWI_NCR\"];
@@ -26,7 +26,7 @@ else
     basedir_in  = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-CCSDS/sample/bin/";
     basedir_out = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-CCSDS/sample/result/";
     file_search_str = "*.bin";
-    % file_search_str = "SID02_HF_20231007-0349.bin";
+    file_search_str = "SID07_HF_20231007-0349.bin";
     indir  = [""];
     outdir = [""];
 end
