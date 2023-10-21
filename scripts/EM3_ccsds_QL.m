@@ -1,10 +1,10 @@
 % ***********************************
-% *** 20231010   Y Kasaba
+% *** 20231007   Y Kasaba
 % ***********************************
 %------------------------------------
 % User inputs
 %------------------------------------
-input_format = 0;   % 0:ccsds      1:bin converted from TMIDX
+input_format = 1;   % 0:ccsds      1:bin converted from TMIDX
 %addpath('/Users/user/Documents/MATLAB/JUICE/HF-QL/')
 %addpath('/Users/user/Documents/MATLAB/JUICE/HF-QL/Func/')
 %addpath('/Users/user/Documents/MATLAB/JUICE/HF-QL/Func-bin/')
@@ -13,19 +13,19 @@ input_format = 0;   % 0:ccsds      1:bin converted from TMIDX
 % ----------------------
 if input_format == 0
     % **** CCSDS ****
-    basedir_in  = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-CCSDS/sample/ccsds/";
-    basedir_out = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-CCSDS/sample/result/";
+    basedir_in  = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-CCSDS/2023/ccsds/";
+    basedir_out = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-CCSDS/2023/result/";
     file_search_str = "*.ccs";
-    file_search_str = "SID07-23_*.ccs";
+    % file_search_str = "HF_20231001-0720.ccs";
     indir  = [""];
     outdir = [""];
     % indir  = ["CFDP_04_RT_EMC_AC_SC2RIME\CFDP\RETRIEVAL\" "RPWI_NCR\"];
     % outdir = ["Phase4\"  "RPWI_NCR\"];
 else
     % **** BIN (from CCSDS or TMIDX) ****
-    basedir_in  = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-CCSDS/sample/bin/";
-    basedir_out = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-CCSDS/sample/result/";
-    file_search_str = "SID06*.bin";
+    basedir_in  = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-CCSDS/2023/bin/";
+    basedir_out = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-CCSDS/2023/result/";
+    file_search_str = "SID06_*.bin";
     indir  = [""];
     outdir = [""];
 end
@@ -33,7 +33,7 @@ end
 
 % ----------------------
 st_ctl_in.raw_ver1_corrected = 0;
-st_ctl_in.title = 'HF_NECP';
+st_ctl_in.title = 'HF_EM3_202309';
 st_ctl_in.xlim = [0 45];
 st_ctl_in.ylim = [-90 -10];
 st_ctl_in.cf = -104.1;
