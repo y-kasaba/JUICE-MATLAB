@@ -19,19 +19,19 @@ function ret = hf_plot_waveform(st_ctl, wave)
 
     nexttile(1)
     plot(tm,xq,'r',tm,xi,'b')
-    title('Waveform X-ch Red:Xq,Blue:Xi')
+    title('Waveform -U ch Red:-Uq,Blue:-Ui')
     xlabel('Time [sec]')
     ylabel('ADC input [relative V]')
 
     nexttile(2)
     plot(tm,yq,'r',tm,yi,'b')
-    title('Waveform Y-ch Red:Yq,Blue:Yi')
+    title('Waveform -V ch Red:-Vq,Blue:-Vi')
     xlabel('Time [sec]')
     ylabel('ADC input [relative V]')
 
     nexttile(3)
     plot(tm,zq,'r',tm,zi,'b')
-    title('Waveform Z-ch Red:Zq,Blue:Zi')
+    title('Waveform -W ch Red:-Wq,Blue:-Wi')
     xlabel('Time [sec]')
     ylabel('ADC input [relative V]')
 

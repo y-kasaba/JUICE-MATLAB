@@ -42,16 +42,16 @@ function ret = hf_plot_stokes_3D(st_ctl, spec)
     % print peak values
     [~, max_ind] = max(I_3d);
     fprintf('---- parameters at amplitude peak : %6.3f --------------------------\n', spec.f(max_ind)/1e3);
-    fprintf(' 3D (I Q/I U/I Vx/I Vy/I Vz/I)     : %8.2e %5.2f %5.2f %5.2f %5.2f %5.2f\n', I_3d(max_ind), Q_3d(max_ind)/I_3d(max_ind), U_3d(max_ind)/I_3d(max_ind), V_3d_x(max_ind)/I_3d(max_ind), V_3d_y(max_ind)/I_3d(max_ind), V_3d_z(max_ind)/I_3d(max_ind));
+    fprintf(' 3D (I Q/I U/I Vu/I Vv/I Vw/I)     : %8.2e %5.2f %5.2f %5.2f %5.2f %5.2f\n', I_3d(max_ind), Q_3d(max_ind)/I_3d(max_ind), U_3d(max_ind)/I_3d(max_ind), V_3d_x(max_ind)/I_3d(max_ind), V_3d_y(max_ind)/I_3d(max_ind), V_3d_z(max_ind)/I_3d(max_ind));
     fprintf(' 3D DoP DoL DoC Pang k_clat k_lon  : %5.2f %5.2f %5.2f %7.2f %7.2f %7.2f\n', dop_3d(max_ind), dol_3d(max_ind), doc_3d(max_ind), ang_3d(max_ind), k_lon(max_ind), k_lat(max_ind));
     fprintf('--------------------------------------------------------------------\n');
-    fprintf(' XY I DoP DoL DoC Pang             : %8.2e %5.2f %5.2f %5.2f %7.2f\n', Ixy(max_ind), dop_xy(max_ind), dol_xy(max_ind), doc_xy(max_ind), ang_xy(max_ind));
-    fprintf(' YZ I DoP DoL DoC Pang             : %8.2e %5.2f %5.2f %5.2f %7.2f\n', Iyz(max_ind), dop_yz(max_ind), dol_yz(max_ind), doc_yz(max_ind), ang_yz(max_ind));
-    fprintf(' ZX I DoP DoL DoC Pang             : %8.2e %5.2f %5.2f %5.2f %7.2f\n', Izx(max_ind), dop_zx(max_ind), dol_zx(max_ind), doc_zx(max_ind), ang_zx(max_ind));
+    fprintf(' UV I DoP DoL DoC Pang             : %8.2e %5.2f %5.2f %5.2f %7.2f\n', Ixy(max_ind), dop_xy(max_ind), dol_xy(max_ind), doc_xy(max_ind), ang_xy(max_ind));
+    fprintf(' VW I DoP DoL DoC Pang             : %8.2e %5.2f %5.2f %5.2f %7.2f\n', Iyz(max_ind), dop_yz(max_ind), dol_yz(max_ind), doc_yz(max_ind), ang_yz(max_ind));
+    fprintf(' WU I DoP DoL DoC Pang             : %8.2e %5.2f %5.2f %5.2f %7.2f\n', Izx(max_ind), dop_zx(max_ind), dol_zx(max_ind), doc_zx(max_ind), ang_zx(max_ind));
     fprintf('--------------------------------------------------------------------\n');
-%     fprintf(' XY I Q U V                        : %8.2e %8.2e %8.2e %8.2e\n', Ixy(max_ind), Q_xy(max_ind), U_xy(max_ind), V_xy(max_ind));
-%     fprintf(' YZ I Q U V                        : %8.2e %8.2e %8.2e %8.2e\n', Iyz(max_ind), Q_yz(max_ind), U_yz(max_ind), V_yz(max_ind));
-%     fprintf(' ZX I Q U V                        : %8.2e %8.2e %8.2e %8.2e\n', Izx(max_ind), Q_zx(max_ind), U_zx(max_ind), V_zx(max_ind));
+%     fprintf(' UV I Q U V                        : %8.2e %8.2e %8.2e %8.2e\n', Ixy(max_ind), Q_xy(max_ind), U_xy(max_ind), V_xy(max_ind));
+%     fprintf(' VW I Q U V                        : %8.2e %8.2e %8.2e %8.2e\n', Iyz(max_ind), Q_yz(max_ind), U_yz(max_ind), V_yz(max_ind));
+%     fprintf(' WU I Q U V                        : %8.2e %8.2e %8.2e %8.2e\n', Izx(max_ind), Q_zx(max_ind), U_zx(max_ind), V_zx(max_ind));
 %     fprintf('--------------------------------------------------------------------\n');
 
     
@@ -66,12 +66,12 @@ function ret = hf_plot_stokes_3D(st_ctl, spec)
     end
 
     [p_freq_MHz, p_xx_dB, p_yy_dB, p_zz_dB] = hf_proc_get_peak_power(spec.f, xx, yy, zz);
-    title(['Peak: ' num2str(p_freq_MHz,'%0.2f') ' MHz'],  ['X(Red):' num2str(p_xx_dB,'%0.1f') ' Y(Green):' num2str(p_yy_dB,'%0.1f') ' Z(Blue):' num2str(p_zz_dB,'%0.1f')]);
+    title(['Peak: ' num2str(p_freq_MHz,'%0.2f') ' MHz'],  ['-U(Red):' num2str(p_xx_dB,'%0.1f') ' -V(Green):' num2str(p_yy_dB,'%0.1f') ' -W(Blue):' num2str(p_zz_dB,'%0.1f')]);
     xlabel ('Frequency [MHz]');
     ylabel (st_ctl.power_unit);
     
     %---------------------------------
-    % [2D] Plot degree of polarization (DoP) (xy, yz, and zx) 
+    % [2D] Plot degree of polarization (DoP) (uv, vw, and wu) 
     %---------------------------------
     nexttile(3)
     if spec.xlog == 0
@@ -80,7 +80,7 @@ function ret = hf_plot_stokes_3D(st_ctl, spec)
         semilogx(spec.f/1e3, dop_xy,'r', spec.f/1e3, dop_yz,'g', spec.f/1e3, dop_zx,'b')
     end
     ylim([-0.1 1.1])
-    title('Red:XY, Green:YZ, Blue:ZX');
+    title('Red:UV, Green:VW, Blue:WU');
     xlabel ('Frequency [MHz]');
     ylabel ('Degree of polarization');
     
@@ -90,17 +90,17 @@ function ret = hf_plot_stokes_3D(st_ctl, spec)
     for i=1:3
         switch i
             case 1
-                label = 'XY';
+                label = 'UV';
                 ang = ang_xy;
                 dol = dol_xy;
                 doc = doc_xy;
             case 2
-                label = 'YZ';
+                label = 'VW';
                 ang = ang_yz;
                 dol = dol_yz;
                 doc = doc_yz;
             case 3
-                label = 'ZX';
+                label = 'WU';
                 ang = ang_zx;
                 dol = dol_zx;
                 doc = doc_zx;
@@ -208,7 +208,7 @@ function ret = hf_plot_stokes_3D(st_ctl, spec)
     xlabel ('Frequency [MHz]');
 
     fprintf('--------------------------------------------------------------------\n');
-    fprintf(' Freq Pxx Pyy Pzz (I DoP DoL DoC Pang)_xy (I DoP DoL DoC Pang)_yz (I DoP DoL DoC Pang)_zx\n');
+    fprintf(' Freq Puu Pvv Pww (I DoP DoL DoC Pang)_uv (I DoP DoL DoC Pang)_vw (I DoP DoL DoC Pang)_wu\n');
     fprintf('%0.3f %0.2f %0.1f %0.1f %8.2e %8.2e %8.2e %5.2f %5.2f %5.2f %5.2f %5.2f %5.2f %5.2f %5.2f %5.2f %7.2f %7.2f %7.2f\n', ...
         p_freq_MHz, p_xx_dB, p_yy_dB, p_zz_dB, ...
         Ixy(max_ind), Iyz(max_ind), Izx(max_ind), ...

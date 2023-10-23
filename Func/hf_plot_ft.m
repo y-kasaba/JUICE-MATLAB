@@ -30,7 +30,7 @@ function hf_plot_ft(st_ctl)
     nexttile(1)
     imagesc(time, freq, x_pow, clims)
 %    imagesc(time, freq, x_pow)
-    title('X-ch');
+    title('-U ch');
     xlabel ('Time');
     ylabel ('Frequency [kHz]');
     c=colorbar;
@@ -39,7 +39,7 @@ function hf_plot_ft(st_ctl)
     nexttile(2)
     imagesc(time, freq, y_pow, clims)
 %    imagesc(time, freq, y_pow)
-    title('Y-ch');
+    title('-V ch');
     xlabel ('Time');
     ylabel ('Frequency [kHz]');
     c=colorbar;
@@ -48,7 +48,7 @@ function hf_plot_ft(st_ctl)
     nexttile(3)
     imagesc(time, freq, z_pow, clims)
 %    imagesc(time, freq, z_pow)
-    title('Z-ch');
+    title('-W ch');
     xlabel ('Time');
     ylabel ('Frequency [kHz]');
     c=colorbar;
@@ -59,7 +59,7 @@ function hf_plot_ft(st_ctl)
     sp_y = mean(y_pow,2);
     sp_z = mean(z_pow,2);
     plot(freq/1000, sp_x, 'r', freq/1000, sp_y, 'g', freq/1000, sp_z, 'b');
-    title('Mean spectra Red:X Green:Y Blue:Z');
+    title('Mean spectra Red:-U Green:-V Blue:-W');
     xlabel ('Frequency [MHz]');
     ylabel ('Power');
 %    xlim(st_ctl.xlim);

@@ -30,69 +30,69 @@ function ret = hf_plot_power_floor(st_ctl, spec)
     zz = spec.zz(:,j);
     
     %---------------------------------
-    % Plot Power spectrum (x) 
+    % Plot Power spectrum (-U) 
     %---------------------------------    
     nexttile(j)
     if spec.xlog == 0
-        if isfield(spec,'noise_floor_x') 
+        if isfield(spec,'noise_floor_-U') 
             semilogy(spec.f/1e3, xx,'r', spec.f/1e3, spec.noise_floor_x,'k')
         else
             semilogy(spec.f/1e3, xx,'r')
         end
     else
-        if isfield(spec,'noise_floor_x') 
+        if isfield(spec,'noise_floor_-U') 
             loglog(spec.f/1e3, xx,'r', spec.f/1e3, spec.noise_floor_x,'k')
         else
             loglog(spec.f/1e3, xx,'r')
         end
     end
-    title({pol_label(j);'X: Red, noise floor: BK'});
+    title({pol_label(j);'-U:Red, noise:BK'});
     xlabel ('Frequency [MHz]');
     ylabel ('Power [rel]');
     if isfield(st_ctl, 'xlim'); xlim(st_ctl.xlim); end
     if isfield(st_ctl, 'ylim'); ylim(st_ctl.ylim); end
 
     %---------------------------------
-    % Plot Power spectrum (y) 
+    % Plot Power spectrum (-V) 
     %---------------------------------    
     nexttile (j+3)
     if spec.xlog == 0
-        if isfield(spec,'noise_floor_y') 
+        if isfield(spec,'noise_floor_-V') 
             semilogy(spec.f/1e3, yy,'g', spec.f/1e3, spec.noise_floor_y,'k')
         else
             semilogy(spec.f/1e3, yy,'g')
         end
     else
-        if isfield(spec,'noise_floor_y') 
+        if isfield(spec,'noise_floor_-V') 
             loglog(spec.f/1e3, yy,'g', spec.f/1e3, spec.noise_floor_y,'k')
         else
             loglog(spec.f/1e3, yy,'g')
         end
     end
-    title('Y: Green, noise floor: BK');
+    title('-V:Green, noise:BK');
     xlabel ('Frequency [MHz]');
     ylabel ('Power [rel]');
     if isfield(st_ctl, 'xlim'); xlim(st_ctl.xlim); end
     if isfield(st_ctl, 'ylim'); ylim(st_ctl.ylim); end
 
     %---------------------------------
-    % Plot Power spectrum (z) 
+    % Plot Power spectrum (-W) 
     %---------------------------------    
     nexttile (j+6)
     if spec.xlog == 0
-        if isfield(spec,'noise_floor_z') 
+        if isfield(spec,'noise_floor_-W') 
             semilogy(spec.f/1e3, zz,'b', spec.f/1e3, spec.noise_floor_z,'k')
         else
             semilogy(spec.f/1e3, zz,'b')
         end
     else
-        if isfield(spec,'noise_floor_z') 
+        if isfield(spec,'noise_floor_-W') 
             loglog(spec.f/1e3, zz,'b', spec.f/1e3, spec.noise_floor_z,'k')
         else
             loglog(spec.f/1e3, zz,'g')
         end
     end
-    title('Z: Blue, noise floor: BK');
+    title('-W:Blue, noise:BK');
     xlabel ('Frequency [MHz]');
     ylabel ('Power [rel]');
     if isfield(st_ctl, 'xlim'); xlim(st_ctl.xlim); end

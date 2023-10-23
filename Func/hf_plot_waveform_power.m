@@ -10,45 +10,45 @@ function ret = hf_plot_waveform_power(st_ctl, wave, spec)
     % set display layout
     tiledlayout(7,1)
 
-    % X-ch (full time span) 
+    % -U ch (full time span) 
     nexttile(1)
     plot(wave.t,wave.xq,'r',wave.t,wave.xi,'b')
-    title('Waveform X-ch Red:Xq / Blue:Xi')
+    title('Waveform -U ch Red:-Uq / Blue:-Ui')
     xlabel('Time [sec]')
-    ylabel('ADC input [V]')
+    ylabel('ADC-in [V]')
 
-    % X-ch (first 100 points) 
+    % -U ch (first 100 points) 
     nexttile(2)
     plot(wave.t(1:100),wave.xq(1:100),'r',wave.t(1:100),wave.xi(1:100),'b')
-    title('Waveform X-ch (the first 100 points) Red:Xq / Blue:Xi')
+    title('Waveform -U ch (the first 100 points) Red:-Uq / Blue:-Ui')
     xlabel('Time [sec]')
-    ylabel('ADC input [V]')
+    ylabel('ADC-in [V]')
 
-    % Y-ch (full time span) 
+    % -V ch (full time span) 
     nexttile(3)
     plot(wave.t,wave.yq,'r',wave.t,wave.yi,'b')
-    title('Waveform Y-ch Red:Yq / Blue:Yi')
+    title('Waveform -V ch Red:-Vq / Blue:-Vi')
     xlabel('Time [sec]')
-    ylabel('ADC input [V]')
+    ylabel('ADC-in [V]')
 
-    % Y-ch (first 100 points) 
+    % -V ch (first 100 points) 
     nexttile(4)
     plot(wave.t(1:100),wave.yq(1:100),'r',wave.t(1:100),wave.yi(1:100),'b')
-    title('Waveform Y-ch (the first 100 points) Red:Yq / Blue:Yi')
+    title('Waveform -V ch (the first 100 points) Red:-Vq / Blue:-Vi')
     xlabel('Time [sec]')
     ylabel('ADC input [V]')
 
-    % Z-ch (full time span) 
+    % -W ch (full time span) 
     nexttile(5)
     plot(wave.t,wave.zq,'r',wave.t,wave.zi,'b')
-    title('Waveform Z-ch Red:Zq / Blue:Zi')
+    title('Waveform -W ch Red:-Wq / Blue:-Wi')
     xlabel('Time [sec]')
     ylabel('ADC input [V]')
 
-    % Z-ch (first 100 points) 
+    % -W ch (first 100 points) 
     nexttile(6)
     plot(wave.t(1:100),wave.zq(1:100),'r',wave.t(1:100),wave.zi(1:100),'b')
-    title('Waveform Z-ch (the first 100 points) Red:Zq / Blue:Zi')
+    title('Waveform -W ch (the first 100 points) Red:-Wq / Blue:-Wi')
     xlabel('Time [sec]')
     ylabel('ADC input [V]')
 
@@ -67,7 +67,7 @@ function ret = hf_plot_waveform_power(st_ctl, wave, spec)
     imax      = [ix,iy,iz];
     [~,im]   = max(dmax);
     p_freq = spec.f(imax(im)) / 1e6;
-    title(['Peak at　' num2str(p_freq,'%0.2f') ' MHz  Red(X)[' num2str(spec.x(imax(im)),'%0.1f') '] Green(Y)[' num2str(spec.y(imax(im)),'%0.1f') '] Blue(Z)[' num2str(spec.z(imax(im)),'%0.1f') '] dBm']);
+    title(['Peak at ' num2str(p_freq,'%0.2f') ' MHz  Red(-U)[' num2str(spec.x(imax(im)),'%0.1f') '] Green(-V)[' num2str(spec.y(imax(im)),'%0.1f') '] Blue(-W)[' num2str(spec.z(imax(im)),'%0.1f') '] dBm']);
     xlabel('Frequency [MHz]')
     ylabel (st_ctl.power_unit);
 

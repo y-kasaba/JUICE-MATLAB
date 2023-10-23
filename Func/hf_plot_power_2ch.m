@@ -36,7 +36,7 @@ function ret = hf_plot_power_2ch(st_ctl, spec)
     imax      = [ix,iy];
     [~,im]   = max(dmax);
     p_freq = spec.f(imax(im)) / 1e3;
-    title(['Peak at　' num2str(p_freq,'%0.3f') ' MHz  Red(X)[' num2str(spec.x(imax(im)),'%0.1f') '] Green(Y)[' num2str(spec.y(imax(im)),'%0.1f') '] dBm']);
+    title(['Peak at ' num2str(p_freq,'%0.3f') ' MHz  Red(-U)[' num2str(spec.x(imax(im)),'%0.1f') '] Green(-V)[' num2str(spec.y(imax(im)),'%0.1f') '] dBm']);
     xlabel ('Frequency [MHz]');
     ylabel (st_ctl.power_unit);
     if isfield(st_ctl, 'xlim'); xlim(st_ctl.xlim); end
@@ -44,7 +44,7 @@ function ret = hf_plot_power_2ch(st_ctl, spec)
 
     if spec.matrix == 0; return; end
 
-    % Plot cross spectrum (xy) 
+    % Plot cross spectrum (UV) 
     nexttile(2)
     if spec.xlog == 0
         if spec.ylog == 0
@@ -60,7 +60,7 @@ function ret = hf_plot_power_2ch(st_ctl, spec)
         end
     end
     xlabel ('Frequency [MHz]');
-    ylabel ('XY');
+    ylabel ('UV');
     if isfield(st_ctl, 'xlim'); xlim(st_ctl.xlim); end
     if isfield(st_ctl, 'ylim'); ylim(st_ctl.ylim); end
 

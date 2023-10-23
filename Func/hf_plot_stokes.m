@@ -36,7 +36,7 @@ function ret = hf_plot_stokes(st_ctl, spec)
     im_zx = spec.im_zx(:,j);
     
     %---------------------------------
-    % Plot Power spectrum (x, y, and z) 
+    % Plot Power spectrum (-U, -V, and -W) 
     %---------------------------------
 
     % check data (negative values)
@@ -56,7 +56,7 @@ function ret = hf_plot_stokes(st_ctl, spec)
     end
 
     [p_freq_MHz, p_xx_dB, p_yy_dB, p_zz_dB] = hf_proc_get_peak_power(spec.f, xx, yy, zz);
-    title(['Peak: ' num2str(p_freq_MHz,'%0.2f') ' MHz'],  ['X(Red):' num2str(p_xx_dB,'%0.1f') ' Y(Green):' num2str(p_yy_dB,'%0.1f') ' Z(Blue):' num2str(p_zz_dB,'%0.1f')]);
+    title(['Peak: ' num2str(p_freq_MHz,'%0.2f') ' MHz'],  ['-U(Red):' num2str(p_xx_dB,'%0.1f') ' -V(Green):' num2str(p_yy_dB,'%0.1f') ' -W(Blue):' num2str(p_zz_dB,'%0.1f')]);
     xlabel ('Frequency [MHz]');
     ylabel (st_ctl.power_unit);
     if isfield(st_ctl, 'xlim'); xlim(st_ctl.xlim); end
@@ -74,13 +74,13 @@ function ret = hf_plot_stokes(st_ctl, spec)
     I_sum = Ixy + Iyz + Izx;
     [~, max_ind] = max(I_sum);
     fprintf('---- parameters at amplitude peak : %6.3f --------------------------\n', spec.f(max_ind)/1e3);
-    fprintf(' XY I DoP DoL DoC Pang               : %8.2e %5.2f %5.2f %5.2f %7.2f\n', Ixy(max_ind), dop_xy(max_ind), dol_xy(max_ind), doc_xy(max_ind), ang_xy(max_ind));
-    fprintf(' YZ I DoP DoL DoC Pang               : %8.2e %5.2f %5.2f %5.2f %7.2f\n', Iyz(max_ind), dop_yz(max_ind), dol_yz(max_ind), doc_yz(max_ind), ang_yz(max_ind));
-    fprintf(' ZX I DoP DoL DoC Pang               : %8.2e %5.2f %5.2f %5.2f %7.2f\n', Izx(max_ind), dop_zx(max_ind), dol_zx(max_ind), doc_zx(max_ind), ang_zx(max_ind));
+    fprintf(' UV I DoP DoL DoC Pang               : %8.2e %5.2f %5.2f %5.2f %7.2f\n', Ixy(max_ind), dop_xy(max_ind), dol_xy(max_ind), doc_xy(max_ind), ang_xy(max_ind));
+    fprintf(' VW I DoP DoL DoC Pang               : %8.2e %5.2f %5.2f %5.2f %7.2f\n', Iyz(max_ind), dop_yz(max_ind), dol_yz(max_ind), doc_yz(max_ind), ang_yz(max_ind));
+    fprintf(' WU I DoP DoL DoC Pang               : %8.2e %5.2f %5.2f %5.2f %7.2f\n', Izx(max_ind), dop_zx(max_ind), dol_zx(max_ind), doc_zx(max_ind), ang_zx(max_ind));
     fprintf('--------------------------------------------------------------------\n');
     
     fprintf('--------------------------------------------------------------------\n');
-    fprintf(' Freq Pxx Pyy Pzz (I DoP DoL DoC Pang)_xy (I DoP DoL DoC Pang)_yz (I DoP DoL DoC Pang)_zx\n');
+    fprintf(' Freq Puu Pvv Pww (I DoP DoL DoC Pang)_uv (I DoP DoL DoC Pang)_vw (I DoP DoL DoC Pang)_wu\n');
     fprintf('%0.3f %0.2f %0.1f %0.1f %8.2e %8.2e %8.2e %5.2f %5.2f %5.2f %5.2f %5.2f %5.2f %5.2f %5.2f %5.2f %7.2f %7.2f %7.2f\n', ...
         p_freq_MHz, p_xx_dB, p_yy_dB, p_zz_dB, ...
         Ixy(max_ind), Iyz(max_ind), Izx(max_ind), ...
@@ -99,7 +99,7 @@ function ret = hf_plot_stokes(st_ctl, spec)
     fprintf('--------------------------------------------------------------------\n');
     
     %---------------------------------
-    % Plot degree of polarization (DoP) (xy, yz, and zx) 
+    % Plot degree of polarization (DoP) (uv, vw, and wu) 
     %---------------------------------
     nexttile(j+m)
     if spec.xlog == 0
@@ -108,9 +108,9 @@ function ret = hf_plot_stokes(st_ctl, spec)
         semilogx(spec.f/1e3, dop_xy,'r', spec.f/1e3, dop_yz,'g', spec.f/1e3, dop_zx,'b')
     end
     ylim([-0.1 1.1])
-    title(pol_label(j), 'Red:XY, Green:YZ, Blue:ZX');
+    title(pol_label(j), 'Red:UV, Green:VW, Blue:WU');
     xlabel ('Frequency [MHz]');
-    ylabel ('Degree of polarization');
+    ylabel ('Deg. polarization');
     if isfield(st_ctl, 'xlim'); xlim(st_ctl.xlim); end
     
     %---------------------------------
@@ -119,17 +119,17 @@ function ret = hf_plot_stokes(st_ctl, spec)
     for i=1:3
         switch i
             case 1
-                label = 'XY';
+                label = 'UV';
                 ang = ang_xy;
                 dol = dol_xy;
                 doc = doc_xy;
             case 2
-                label = 'YZ';
+                label = 'VW';
                 ang = ang_yz;
                 dol = dol_yz;
                 doc = doc_yz;
             case 3
-                label = 'ZX';
+                label = 'WU';
                 ang = ang_zx;
                 dol = dol_zx;
                 doc = doc_zx;
@@ -142,7 +142,7 @@ function ret = hf_plot_stokes(st_ctl, spec)
             ylim([-1.1 1.1])
             yyaxis right
             plot(spec.f/1e3, ang,'b.')
-            ylabel ('Angle of pol axis [deg]');
+            ylabel ('Angle pol. axis [deg]');
             ylim([-5.0 185.0])
         else
             yyaxis left

@@ -27,7 +27,7 @@ function ret = hf_plot_power(st_ctl, spec)
             imax      = [ix,iy,iz];
             [~,im]   = max(dmax);
             p_freq = spec.f(imax(im)) / 1e3;
-            title(['Peak at　' num2str(p_freq,'%0.2f') ' MHz  Red(X)[' num2str(spec.x(imax(im)),'%0.1f') '] Green(Y)[' num2str(spec.y(imax(im)),'%0.1f') '] Blue(Z)[' num2str(spec.z(imax(im)),'%0.1f') '] dBm']);
+            title(['Peak at ' num2str(p_freq,'%0.2f') ' MHz  Red(-U)[' num2str(spec.x(imax(im)),'%0.1f') '] Green(-V)[' num2str(spec.y(imax(im)),'%0.1f') '] Blue(-W)[' num2str(spec.z(imax(im)),'%0.1f') '] dBm']);
 %         case 2    
 %             if spec.xlog == 0
 %                 plot(spec.f/1e3, spec.x,'r', spec.f/1e3, spec.y,'g')
@@ -53,13 +53,13 @@ function ret = hf_plot_power(st_ctl, spec)
 
         switch i
             case 1
-                if st_ctl.n_ch == 3; label='X'; else; label='Ch1'; end  
+                if st_ctl.n_ch == 3; label='-U'; else; label='Ch1'; end  
                 data = spec.xx;
             case 2
-                if st_ctl.n_ch == 3; label='Y'; else; label='Ch2'; end  
+                if st_ctl.n_ch == 3; label='-V'; else; label='Ch2'; end  
                 data = spec.yy;
             case 3
-                label='Z';
+                label='-W';
                 data = spec.zz;
         end
         
