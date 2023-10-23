@@ -4,7 +4,7 @@
 %------------------------------------
 % User inputs
 %------------------------------------
-input_format = 1;   % 0:ccsds      1:bin converted from TMIDX
+input_format = 0;   % 0:ccsds      1:bin converted from TMIDX
 %addpath('/Users/user/Documents/MATLAB/JUICE/HF-QL/')
 %addpath('/Users/user/Documents/MATLAB/JUICE/HF-QL/Func/')
 %addpath('/Users/user/Documents/MATLAB/JUICE/HF-QL/Func-bin/')
