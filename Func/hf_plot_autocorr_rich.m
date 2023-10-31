@@ -14,7 +14,8 @@ function ret = hf_plot_autocorr_rich(st_rpw, st_ctl, auto)
     % Plot stream (x, y, and z) 
     for i=1:i_loop
         nexttile;
-        intitle = sprintf('#%d %7.1f kHz', i_loop+1-i, auto.freq(i));
+        % intitle = sprintf('#%d %7.1f kHz', i_loop+1-i, auto.freq(i));
+        intitle = sprintf('#%d %7.1f kHz', i, auto.freq(i));
         plot(auto.t(2:n), auto.auto(2:n,i), '-');
         title  ( intitle );
         xlabel ('t [sec]');
