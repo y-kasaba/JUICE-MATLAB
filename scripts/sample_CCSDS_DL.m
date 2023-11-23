@@ -1,5 +1,5 @@
 % ***********************************
-% *** 20231010   Y Kasaba
+% *** 20231123   Y Kasaba
 % ***********************************
 %------------------------------------
 % User inputs
@@ -30,17 +30,6 @@ else
 end
 % ----------------------
 
-% ----------------------
-st_ctl_in.raw_ver1_corrected = 0;
-st_ctl_in.title = 'HF_NECP';
-st_ctl_in.xlim = [0 45];
-st_ctl_in.ylim = [-90 -10];
-st_ctl_in.cf = -104.1;
-%------------------------------------------------------------------------------------
-
-ql = 0;    % DL
-st_ctl_in.timeout = 5;
-
 n_dir = numel(indir);
 for j=1: n_dir
     tdir = append(basedir_out, outdir(j)); 
@@ -48,36 +37,16 @@ for j=1: n_dir
 
     s = dir(append(basedir_in, indir(j), file_search_str));
     n_file = numel(s);
+
     for i=1: n_file
         file = s(i).name;
-        infile = append(basedir_in, indir(j), file);
-        fprintf("\n[file %d]    %s\n", i, file);
-        fprintf("   infile  %s\n", infile);
+        input_file = append(basedir_in,   indir(j), file);
+        output_dir = append(basedir_out, outdir(j));
 
         if input_format == 0
-            outfile = append(basedir_out, outdir(j), file, '.hf.ccsds');
-            fprintf("   outfile %s\n", outfile);
-            [ret, st_ctl] = hf_get_packet(infile, outfile);
+            ret = HF_dl_script    (input_file, output_dir);
         else
-            [ret, st_ctl] = hf_get_packet_bin(infile);
+            ret = HF_dl_script_bin(input_file, output_dir);
         end
-
-        if ret == 1 
-            fprintf("[HF data in %s]", file);
-            fprintf("  HF-packet:%d  Length[Byte]:%d\n", st_ctl.n_pkt, st_ctl.out_sz);
-            st_ctl_in.dir_in  = append(basedir_in,  indir(j));
-            st_ctl_in.dir_out = append(basedir_out, outdir(j));
-            st_ctl_in.file_in = file;
-
-            % ----------------------
-            if input_format == 0
-                [st_ctl_in] = hf_ccsds_ql(ql, st_ctl_in);
-            else
-                [st_ctl_in] = hf_ccsds_ql_bin(ql, st_ctl_in);
-            end
-            % ----------------------
-        else
-            fprintf("No HF data\n");
-        end      
     end
 end
