@@ -16,6 +16,7 @@ if input_format == 0
     basedir_in  = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-CCSDS/sample/ccsds/";
     basedir_out = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-CCSDS/sample/result/";
     file_search_str = "*.ccs";
+    file_search_str = "SID02-high_20231019-1749.ccs";
     indir  = [""];
     outdir = [""];
     % indir  = ["CFDP_04_RT_EMC_AC_SC2RIME\CFDP\RETRIEVAL\" "RPWI_NCR\"];
