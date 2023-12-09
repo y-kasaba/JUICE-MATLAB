@@ -1,5 +1,5 @@
 % ***********************************
-% *** 20231123   Y Kasaba
+% *** 20231209   Y Kasaba
 % ***********************************
 %------------------------------------
 % User inputs
@@ -13,8 +13,8 @@ input_format = 1;   % 0:ccsds      1:bin converted from TMIDX
 % ----------------------
 if input_format == 0
     % **** CCSDS ****
-    basedir_in  = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-TMIDX/202311_FS/ccsds/";
-    basedir_out = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-TMIDX/202311_FS/result/";
+    basedir_in  = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-TMIDX/202312_FS/ccsds/";
+    basedir_out = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-TMIDX/202312_FS/result/";
     file_search_str = "*.ccs";
     indir  = [""];
     outdir = [""];
@@ -22,8 +22,8 @@ if input_format == 0
     % outdir = ["Phase4\"  "RPWI_NCR\"];
 else
     % **** BIN (from CCSDS or TMIDX) ****
-    basedir_in  = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-TMIDX/202311_FS/bin/";
-    basedir_out = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-TMIDX/202311_FS/result/";
+    basedir_in  = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-TMIDX/202312_FS/bin/";
+    basedir_out = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-TMIDX/202312_FS/result/";
     file_search_str = "*.bin";
     indir  = [""];
     outdir = [""];

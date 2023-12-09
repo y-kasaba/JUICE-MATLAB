@@ -1,6 +1,7 @@
 function  [ret, spec, wave, spec_hres] = hf_proc_raw(ver, st_ctl, st_aux, st_hfa, raw_data)
 
     ret = 0;
+    spec_hres = 0;
 
     % time data [msec]
     sample_rate = [296000 148000 74000 37000];
