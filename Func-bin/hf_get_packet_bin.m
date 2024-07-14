@@ -1,5 +1,5 @@
 % ***********************************
-% *** 20231012   Y Kasaba
+% *** 20240713   Y Kasaba
 % ***********************************
 function [ret, st_ctl] = hf_get_packet_bin(in_file)
 
@@ -15,10 +15,11 @@ function [ret, st_ctl] = hf_get_packet_bin(in_file)
 
     while ~feof(r)
         % ----------------------
-        % 20230917: Read binary header 10B = "RPWI"(4B) + "SID"(1B) + "AUX-size"(1B) + "HEADER-SIZE(1B) + "SCIENCE-size"(3B)
+        % Read binary header 18B 
+        %   = "RPWI"(4B) + "SID"(1B) + "AUX-size"(1B) + "HEADER-SIZE(1B) + "SCI-size"(3B) + "SCET"(8B)
         % ----------------------
-        hdr_bin = fread(r, 10, 'uint8');
-        if size(hdr_bin) ~= 10
+        hdr_bin = fread(r, 18, 'uint8');
+        if size(hdr_bin) ~= 18
             break;
         end
         n_pkt = n_pkt + 1;
@@ -32,7 +33,8 @@ function [ret, st_ctl] = hf_get_packet_bin(in_file)
 
         % data size
         sz = st_bin.pkt_len; 
-        
+        out_sz = out_sz + sz;
+
         %----------------------------------------
         % Check HF science data or not
         %----------------------------------------

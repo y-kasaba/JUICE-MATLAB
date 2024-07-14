@@ -1,5 +1,5 @@
 % ***********************************
-% *** 20231012   Y Kasaba
+% *** 20240713   Y Kasaba
 % ***********************************
 function [st_ctl, st_rpw, st_aux, st_hfa, st_time, rdata, data_sz, err] = hf_ccsds_depacket_bin(st_ctl)
 
@@ -14,10 +14,11 @@ function [st_ctl, st_rpw, st_aux, st_hfa, st_time, rdata, data_sz, err] = hf_ccs
     
     while true
         % ----------------------
-        % Read binary header 10B = "RPWI"(4B) + "SID"(1B) + "AUX-size"(1B) + "HEADER-SIZE(1B) + "SCIENCE-size"(3B)
+        % Read binary header 18B 
+        %   = "RPWI"(4B) + "SID"(1B) + "AUX-size"(1B) + "HEADER-SIZE(1B) + "SCI-size"(3B) + "SCET"(8B)
         % ----------------------
-        hdr_bin = fread(st_ctl.r, 10, 'uint8');
-        if size(hdr_bin) ~= 10
+        hdr_bin = fread(st_ctl.r, 18, 'uint8');
+        if size(hdr_bin) ~= 18
             fprintf("***** EOF is detected *****\n");
             err = 1;
             break;
@@ -32,7 +33,8 @@ function [st_ctl, st_rpw, st_aux, st_hfa, st_time, rdata, data_sz, err] = hf_ccs
         % st_pre = hf_get_hdr_pre(hdr_bin);
             
         % st_sec = hf_get_hdr_sec(hdr_bin);
-        st_sec.time         = 0;    % dummy
+        % st_sec.time = 0;            % dummy
+        st_sec.time = st_bin.time;    % 20240713
 
         %----------------------------------------
         % Dummy RPWI header (8 Bytes)
@@ -102,7 +104,7 @@ function [st_ctl, st_rpw, st_aux, st_hfa, st_time, rdata, data_sz, err] = hf_ccs
         %----------------------------------------
         % Get time information (added to hdr_rpw)
         %----------------------------------------
-        [st_time, st_ctl] = hf_get_time_info(st_ctl, st_sec, st_rpw);
+        [st_time, st_ctl] = hf_get_time_info_bin(st_ctl, st_sec, st_rpw);
 
 
         %----------------------------------------

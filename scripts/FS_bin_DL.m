@@ -1,5 +1,5 @@
 % ***********************************
-% *** 20240128   Y Kasaba
+% *** 20240710   Y Kasaba
 % ***********************************
 %------------------------------------
 % User inputs
@@ -13,8 +13,8 @@ input_format = 1;   % 0:ccsds      1:bin converted from TMIDX
 % ----------------------
 if input_format == 0
     % **** CCSDS ****
-    basedir_in  = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-TMIDX/202312_C/ccsds/";
-    basedir_out = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-TMIDX/202312_C/result/";
+    basedir_in  = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-TMIDX/202406_EM3/ccsds/";
+    basedir_out = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-TMIDX/202406_EM3/result/";
     file_search_str = "*.ccs";
     indir  = [""];
     outdir = [""];
@@ -22,12 +22,12 @@ if input_format == 0
     % outdir = ["Phase4\"  "RPWI_NCR\"];
 else
     % **** BIN (from CCSDS or TMIDX) ****
-    %basedir_in  = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-TMIDX/202401_FS/bin/";
-    %basedir_out = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-TMIDX/202401_FS/result/";
-    basedir_in  = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/Data-CDF/2024/01/bin/";
-    basedir_out = "/Users/user/0-python/JUICE_GS_test/";
-    %basedir_out = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/Data-CDF/2024/01/result/";
-    file_search_str = "JUICE_L1a_RPWI-HF-SID20_20240126T114800-V01.bin";
+    %basedir_in  = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-TMIDX/202406_EM3/bin/";
+    %basedir_out = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/test-TMIDX/202406_EM3/result/";
+    basedir_in  = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/Data-CDF/2024/07/bin/";
+    basedir_out = "/Users/user/Google-Univ/TU/TU_C_staffs/C-Space/JUICE/data/Data-CDF/2024/07/result/";
+    file_search_str = "*.bin";
+    %file_search_str = "JUICE_L1a_RPWI-HF-SID20_20240126T114800-V01.bin";
     indir  = [""];
     outdir = [""];
 end
